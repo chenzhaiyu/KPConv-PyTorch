@@ -85,7 +85,7 @@ class S3DISDataset(PointCloudDataset):
         self.ignored_labels = np.array([])
 
         # Dataset folder
-        self.path = '../../Data/S3DIS'
+        self.path = '../../Datasets/Stanford3dDataset_v1.2_Aligned_Version'
 
         # Type of task conducted on this dataset
         self.dataset_task = 'cloud_segmentation'
@@ -320,7 +320,7 @@ class S3DISDataset(PointCloudDataset):
                 if self.set != 'ERF':
                     tukeys = np.square(1 - d2s / np.square(self.config.in_radius))
                     tukeys[d2s > np.square(self.config.in_radius)] = 0
-                    self.potentials[cloud_ind][pot_inds] += tukeys
+                    self.potentials[cloud_ind][pot_inds] += torch.from_numpy(tukeys)
                     min_ind = torch.argmin(self.potentials[cloud_ind])
                     self.min_potentials[[cloud_ind]] = self.potentials[cloud_ind][min_ind]
                     self.argmin_potentials[[cloud_ind]] = min_ind
