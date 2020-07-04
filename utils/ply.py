@@ -272,6 +272,10 @@ def write_ply(filename, field_list, field_names, triangular_faces=None):
     if not filename.endswith('.ply'):
         filename += '.ply'
 
+    # make dir if not exist
+    import os
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
     # open in text mode to write the header
     with open(filename, 'w') as plyfile:
 

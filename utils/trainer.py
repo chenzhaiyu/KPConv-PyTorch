@@ -587,6 +587,8 @@ class ModelTrainer:
                 pot_points = np.array(val_loader.dataset.pot_trees[i].data, copy=False)
                 cloud_name = file_path.split('/')[-1]
                 pot_name = join(pot_path, cloud_name)
+                # fix the mixed slashes
+                pot_name = pot_name.replace("\\", "/")
                 pots = val_loader.dataset.potentials[i].numpy().astype(np.float32)
                 write_ply(pot_name,
                           [pot_points.astype(np.float32), pots],
